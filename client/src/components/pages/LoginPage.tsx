@@ -1,0 +1,83 @@
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ErrorMessage } from "../forms/ErrorMessage";
+import { useAuth } from "../../context/AuthContext";
+
+export function LoginPage() {
+  const { setUser, setToken } = useAuth();
+
+  const [usernameInput, setUsernameInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
+  const [invalidLogin, setInvalidLogin] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  
+  const navigate = useNavigate();
+
+  const showInvalidLoginMessage = isSubmitted && invalidLogin;
+
+  const handleLogin = async () => {
+    const res = await fetch("http://localhost:3000/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: usernameInput, 
+        password: passwordInput,
+      }),
+    });
+    
+    const data = await res.json();
+    
+    if(!res.ok) {
+      return setInvalidLogin(true);
+    }
+
+    setUser(data.user);
+    setToken(data.token);
+    navigate("/home");
+  }
+
+  return (
+    <div className="login-page">
+      <h1>Login Page</h1>
+      <form className="login-form"
+        onSubmit={async (e) => {
+          e.preventDefault();
+          setIsSubmitted(true);
+          setInvalidLogin(false);
+
+          await handleLogin();
+          setUsernameInput("");
+          setPasswordInput("");
+        }}
+      >
+        <h2>Username</h2>
+        <input 
+          type="text"
+          value={usernameInput}
+          onChange={(e) => {
+            setUsernameInput(e.target.value)
+            setInvalidLogin(false);
+          }}
+        />
+        <h2>Password</h2>
+        <input 
+          type="password"
+          value={passwordInput}
+          onChange={(e) => {
+            setPasswordInput(e.target.value)
+            setInvalidLogin(false);
+          }} 
+        />
+        <ErrorMessage 
+          message={"Username or password is incorrect"} 
+          show={showInvalidLoginMessage} 
+        />
+        <button className="btn-submit" type="submit">Login</button>
+        <h2>Don't have an account?</h2>
+        <button className="btn-link"><Link to={"/signup"}>Create an account</Link></button>
+      </form>  
+    </div>
+  )
+}

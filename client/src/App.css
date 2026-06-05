@@ -1,0 +1,102 @@
+/* LOGIN PAGE */
+.login-page, .signup-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-form, .signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  transition: all 0.4s ease;
+}
+
+button {
+  border: 1px solid;
+  padding: 5px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.btn-submit {
+  margin-top: 30px;
+}
+
+button:hover {
+  color: white;
+  background-color: blue;
+}
+
+button:hover a {
+  color: white;
+}
+
+.invalid-message {
+  color: red;
+  margin-top: 15px;
+}
+
+.invalid-input {
+  border: 1px solid red;
+  background-color: pink;
+}
+
+/* GAMES */
+.games-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.games-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 30px;
+  width: 70%;
+}
+
+.game-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 150px;
+  height: 200px;
+  padding: 20px;
+  overflow-wrap: break-word;
+  background-image: linear-gradient(to top, rgb(194, 194, 194), white);
+  transition: transform 0.2s ease;
+  user-select: none;
+}
+
+.game-card:hover {
+  transform: scale(1.03);
+}
+
+.game-btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.fa-heart {
+  font-size: 20px;
+  color: black;
+}
+
+.fa-heart.favorited {
+  color: red;
+}
