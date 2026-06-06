@@ -1,41 +1,28 @@
-import { useEffect, useState } from "react"
 import { GameCard } from "../cards/GameCard";
-import type { Game } from "../../types";
 import { useAuth } from "../../context/AuthContext";
+import type { Game } from "../../types";
+import { useQuery } from "@tanstack/react-query";
+import { fetchFavorites } from "../../api/favorites";
 
 export function FavoritesSection() {
   const { token } = useAuth();
 
-  const [favoriteGames, setFavoriteGames] = useState<Game [] | []>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (!token) return;
-
-    const getAllFavoriteGames = async () => {
-      setIsLoading(true);
-      const res = await fetch("http://localhost:3000/users/favorites", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await res.json();
-      setFavoriteGames(data);
-      setIsLoading(false);
-    }
-    getAllFavoriteGames();
-  }, [token]);
+  const { data: favorites = [], isLoading } = useQuery({
+    queryKey: ["favorites"],
+    queryFn: () => fetchFavorites(token!),
+    enabled: !!token
+  })
 
   const displayGames = 
-    favoriteGames.length > 0
-      ? favoriteGames.map((game) => (
+    favorites.length > 0
+      ? favorites.map((game: Game) => (
         <GameCard game={game} />
       ))
-      : <p>No games found in database</p>
+      : <p className="section-status">{`You have no favorite games :(`}</p>
 
   return (
     <section className="games-section favorites">
-      <h2>Favorites ({favoriteGames.length})</h2>
+      <h2>Favorites ({favorites.length})</h2>
       <div className="games-container favorites">
         {!isLoading ? displayGames : <p>Loading games...</p>}
       </div>

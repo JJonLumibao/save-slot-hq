@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { prisma } from "../db.setup.js";
 import type { Request, Response, NextFunction } from "express";
-import { error } from "node:console";
 
 const gameController = Router();
 
@@ -29,5 +28,7 @@ gameController.get("/games/:gameId/favoritedBy", async (req: Request, res: Respo
 
   return res.json(game.favoritedBy);
 });
+
+
 
 export default gameController;

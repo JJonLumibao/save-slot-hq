@@ -62,7 +62,7 @@ userController.delete("/users/favorites/:gameId",
       },
       data: {
         favorites: {
-          connect: {
+          disconnect: {
             id: gameId,
           },
         },

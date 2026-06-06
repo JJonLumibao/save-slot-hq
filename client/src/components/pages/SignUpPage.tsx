@@ -172,9 +172,9 @@ export function SignUpPage() {
             setEmailInput(e.target.value);
           }}
         />
-        <button className="btn-submit">Create account</button>
+        <button className="log-button btn-submit">Create account</button>
         <h2>Have an account?</h2>
-        <button className="btn-link"><Link to={"/login"}>Go to Login Page</Link></button>
+        <button className="log-button btn-link"><Link to={"/login"}>Go to Login Page</Link></button>
       </form>
     </div>
   )

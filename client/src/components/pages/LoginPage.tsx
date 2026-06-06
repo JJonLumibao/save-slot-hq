@@ -74,9 +74,9 @@ export function LoginPage() {
           message={"Username or password is incorrect"} 
           show={showInvalidLoginMessage} 
         />
-        <button className="btn-submit" type="submit">Login</button>
+        <button className="log-button btn-submit" type="submit">Login</button>
         <h2>Don't have an account?</h2>
-        <button className="btn-link"><Link to={"/signup"}>Create an account</Link></button>
+        <button className="log-button btn-link"><Link to={"/signup"}>Create an account</Link></button>
       </form>  
     </div>
   )

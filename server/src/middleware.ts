@@ -2,6 +2,7 @@ import type { Request, Response, NextFunction } from "express";
 import { z } from "zod";
 import { getDataFromAuthToken } from "./auth-utils.js";
 import { prisma } from "./db.setup.js"
+import { error } from "node:console";
 
 type RequestSchemas = {
   body?: z.ZodTypeAny;
@@ -67,4 +68,28 @@ export const authMiddleware = async (
   }
   req.user = userFromJwt;
   next();
-}
+};
+
+export const premiumVerification = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  if (req.user?.role !== "PREMIUM") {
+    return res.status(403).json({
+      error: "Premium membership required",
+    });
+  }
+};
+
+export const adminVerification = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  if (req.user?.role !== "ADMIN") {
+    return res.status(403).json({
+      error: "Admin members only",
+    });
+  }
+};

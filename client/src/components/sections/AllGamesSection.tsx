@@ -1,25 +1,17 @@
-import { useEffect, useState } from "react"
-import type { Game } from "../../types"
 import { GameCard } from "../cards/GameCard";
+import { useQuery } from "@tanstack/react-query";
+import { fetchGames } from "../../api/games";
+import type { Game } from "../../types";
 
 export function AllGamesSection() {
-  const [allGames, setAllGames] = useState<Game[] | []>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const getAllGames = async () => {
-      setIsLoading(true);
-      const res = await fetch("http://localhost:3000/games");
-      const data = await res.json();
-      setAllGames(data);
-      setIsLoading(false);
-    }
-    getAllGames();
-  }, []);
+  const { data: allGames = [], isLoading } = useQuery({
+    queryKey: ["games"],
+    queryFn: fetchGames,
+  })
 
   const displayGames = 
     allGames.length > 0
-      ? allGames.map((game) => (
+      ? allGames.map((game: Game) => (
           <GameCard game={game} />
         ))
       : <p>No games found in database</p>

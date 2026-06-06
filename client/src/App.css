@@ -18,7 +18,7 @@ a {
   transition: all 0.4s ease;
 }
 
-button {
+.log-button {
   border: 1px solid;
   padding: 5px;
   background-color: white;
@@ -30,12 +30,12 @@ button {
   margin-top: 30px;
 }
 
-button:hover {
+.log-button:hover {
   color: white;
   background-color: blue;
 }
 
-button:hover a {
+.log-button:hover a {
   color: white;
 }
 
@@ -60,6 +60,7 @@ button:hover a {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 30px;
   width: 70%;
 }
@@ -67,7 +68,7 @@ button:hover a {
 .game-card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   text-align: center;
   border: 1px solid black;
   border-radius: 5px;
@@ -92,11 +93,111 @@ button:hover a {
   gap: 20px;
 }
 
-.fa-heart {
+.fa-heart, .fa-heart-crack {
   font-size: 20px;
   color: black;
+  cursor: pointer;
+  transition: transfrom 0.3s ease;
 }
 
 .fa-heart.favorited {
   color: red;
+}
+
+.fa-heart:hover, .fa-heart-crack:hover {
+  color: rgb(219, 119, 136);
+}
+
+.section-status {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+/* MORE INFO */
+.game-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(6px);
+}
+
+.content-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+  background-color: white;
+  border: 1px solid black;
+  height: 55%;
+  width: 45%;
+  padding: 1.5rem;
+}
+
+.btn-close-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  transition: transform 0.2s ease;
+}
+
+.btn-close-modal:hover {
+  transform: scale(1.08);
+}
+
+.fa-circle-xmark {
+  display: flex;
+  font-size: 30px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-header {
+  font-size: 3rem;
+}
+
+.content-description {
+  font-size: 1.5rem;
+}
+
+.player-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.player-list {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(189, 189, 189);
+}
+
+.player-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  background-image: linear-gradient(to top, rgb(194, 194, 194), white);
+  font-size: 1.2rem;
 }
