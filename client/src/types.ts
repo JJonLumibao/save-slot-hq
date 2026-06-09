@@ -1,6 +1,7 @@
 export type User = {
   firstName: string;
   lastName: string;
+  username: string;
   email: string;
   role: "REGULAR" | "PREMIUM" | "ADMIN";
 }
@@ -10,3 +11,12 @@ export type Game = {
   name: string;
   description: string;
 };
+
+export type Review = {
+  id: number;
+  rating: number;
+  comment: string;
+  user: {
+    username: string;
+  }
+}

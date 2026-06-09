@@ -1,3 +1,10 @@
+/* GENERAL */
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
 /* LOGIN PAGE */
 .login-page, .signup-page {
   display: flex;
@@ -12,6 +19,36 @@
   align-items: center;
 }
 
+.form-header {
+  font-size: 1.8rem;
+  margin-top: 120px;
+}
+
+.input-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-header  {
+  text-align: left;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.input-wrap input {
+  border-radius: 6px;
+  width: 250px;
+  height: 30px;
+  transition: border-color 0.2s ease;
+  padding: 0 10px;
+  margin: 5px 0;
+}
+
+.input-wrap input:focus, .review-text:focus {
+  border-color: rgb(0, 47, 255);
+  outline: none;
+}
+
 a {
   text-decoration: none;
   color: black;
@@ -19,10 +56,11 @@ a {
 }
 
 .log-button {
+  width: 150px;
   border: 1px solid;
+  border-radius: 6px;
   padding: 5px;
   background-color: white;
-  cursor: pointer;
   transition: all 0.4s ease;
 }
 
@@ -30,39 +68,130 @@ a {
   margin-top: 30px;
 }
 
-.log-button:hover {
+.log-button:hover:not([disabled]) {
   color: white;
   background-color: blue;
+  cursor: pointer;
 }
 
-.log-button:hover a {
+.log-button:hover:not([disabled]) a {
   color: white;
 }
 
 .invalid-message {
+  color: white;
+  user-select: none;
+}
+
+.invalid-message.visible {
   color: red;
-  margin-top: 15px;
+  font-size: 0.9rem;
 }
 
 .invalid-input {
-  border: 1px solid red;
+  border-color: red;
   background-color: pink;
+  outline: none;
+}
+
+/* HOME PAGE */
+.header {
+  position: absolute;
+  top: 0;
+  flex-direction: row;
+  color: white;
+  background-color: black;
+  width: 100%;
+  height: 80px;
+  z-index: 1000;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 30px;
+}
+
+.account-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+  height: 80px;
+}
+
+.fa-circle-user {
+  font-size: 1.8rem;
+}
+
+.account-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.account-details > h3, .account-details > p {
+  margin: 0;
+  padding: 0;
+}
+
+.account-details > p {
+  font-size: 0.8rem;
+}
+
+.page-options {
+  opacity: 0;
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  top: 80px;
+  right: 0;
+  transition: opacity 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 180px;
+}
+
+.page-options.visible {
+  opacity: 1;
+  cursor: pointer;
+  pointer-events: visible;
+}
+
+.option {
+  color: black;
+  background-color: rgb(228, 228, 228);
+  border: 1px solid black;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  transition: background-color 0.4s ease;
+}
+
+.option:hover {
+  background-color: rgb(177, 177, 177);
 }
 
 /* GAMES */
 .games-section {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin: 50px 100px;
+}
+
+.games-section.favorites {
+  margin-top: 100px;
 }
 
 .games-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 30px;
-  width: 70%;
 }
 
 .game-card {
@@ -117,7 +246,7 @@ a {
 .game-modal {
   position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: 1100;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -138,7 +267,7 @@ a {
   z-index: 200;
   background-color: white;
   border: 1px solid black;
-  height: 55%;
+  height: 85%;
   width: 45%;
   padding: 1.5rem;
 }
@@ -167,6 +296,14 @@ a {
 
 .content {
   display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: space-around;
+
+}
+
+.content-headings {
+  display: flex;
   flex-direction: column;
 }
 
@@ -182,6 +319,9 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 250px;
+  width: 200px;
+  margin-bottom: 20px;
 }
 
 .player-list {
@@ -191,6 +331,7 @@ a {
   width: 100%;
   height: 100%;
   background-color: rgb(189, 189, 189);
+  overflow-y: auto;
 }
 
 .player-list-item {
@@ -200,4 +341,85 @@ a {
   height: 30px;
   background-image: linear-gradient(to top, rgb(194, 194, 194), white);
   font-size: 1.2rem;
+  border: 1px solid black;
+}
+
+.review-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.review-container h2 {
+  margin: 0;
+}
+
+.rating-review {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.star-click {
+  position: relative;
+  z-index: 251;
+  cursor: pointer;
+  font-size: 20px;
+  left: -25px;
+}
+
+.selected-star {
+  color: yellow;
+}
+
+.star-border {
+  position: relative;
+  left: 25px;
+  z-index: 250;
+  font-size: 28px;
+}
+
+.comment-review {
+  width: 100%;
+}
+
+.comment-review form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.review-text {
+  padding: 10px;
+  border-radius: 6px;
+  width: 80%;
+  height: 50px;
+}
+
+.premium-block {
+  position: absolute;
+  top: 20px;
+  backdrop-filter: blur(6px);
+  z-index: 500;
+  width: 100%;
+  height: 100%;
+}
+
+/* ALL REVIEWS */
+.all-reviews-list {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 230px;
+  gap: 10px;
+}
+
+.all-review-card {  
+  border: 1px solid black;
+  border-radius: 6px;
+  padding: 5px 10px;
 }

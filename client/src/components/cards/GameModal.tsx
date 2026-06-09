@@ -1,6 +1,8 @@
 import type { Dispatch, SetStateAction } from "react"
 import { PlayerList } from "./PlayerList"
 import type { Game } from "../../types"
+import { ReviewForm } from "../forms/ReviewForm";
+import { AllReviews } from "./AllReviews";
 
 export const GameModal = ({
   setMoreInfoState,
@@ -9,7 +11,6 @@ export const GameModal = ({
   setMoreInfoState: Dispatch<SetStateAction<boolean>>,
   game: Game,
 }) => {
-
   const { name, description } = game;
 
   return (
@@ -26,8 +27,10 @@ export const GameModal = ({
           <i className="fa-regular fa-circle-xmark"></i>
         </div>
         <div className="content">
-          <h1 className="content-header">{name}</h1>
-          <p className="content-description">{description}</p>
+          <div className="content-headings">
+            <h1 className="content-header">{name}</h1>
+            <p className="content-description">{description}</p>
+          </div>
           <div className="player-list-container">
             <h2>Other players who like this game:</h2>
             <div className="player-list">
@@ -35,6 +38,8 @@ export const GameModal = ({
             </div>
           </div>
         </div>
+        <ReviewForm gameId={game.id}/>
+        <AllReviews gameId={game.id}/>
       </div>
     </div>
   )

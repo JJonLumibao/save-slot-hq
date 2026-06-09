@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ErrorMessage } from "../forms/ErrorMessage";
 import { useAuth } from "../../context/AuthContext";
+import { TextInput } from "../forms/TextInput";
 
 export function LoginPage() {
   const { setUser, setToken } = useAuth();
@@ -12,6 +13,8 @@ export function LoginPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   
   const navigate = useNavigate();
+
+  const emptyInput = usernameInput.length === 0 || passwordInput.length === 0;
 
   const showInvalidLoginMessage = isSubmitted && invalidLogin;
 
@@ -40,41 +43,51 @@ export function LoginPage() {
 
   return (
     <div className="login-page">
-      <h1>Login Page</h1>
+      <header className="header">
+        <div className="header-container">
+          <h1 className="header-title">Save Slot HQ</h1>
+        </div>
+      </header>
+      <p className="form-header">Login Page</p>
       <form className="login-form"
         onSubmit={async (e) => {
           e.preventDefault();
           setIsSubmitted(true);
           setInvalidLogin(false);
-
+          
           await handleLogin();
-          setUsernameInput("");
           setPasswordInput("");
         }}
       >
-        <h2>Username</h2>
-        <input 
+        <TextInput 
+          label="Username"
           type="text"
+          placeholder=""
           value={usernameInput}
+          errorMessage=""
+          showError={false}
           onChange={(e) => {
             setUsernameInput(e.target.value)
             setInvalidLogin(false);
           }}
         />
-        <h2>Password</h2>
-        <input 
+        <TextInput
+          label="Password"
           type="password"
+          placeholder=""
           value={passwordInput}
+          errorMessage=""
+          showError={false}
           onChange={(e) => {
             setPasswordInput(e.target.value)
             setInvalidLogin(false);
-          }} 
-        />
+          }}
+        /> 
         <ErrorMessage 
           message={"Username or password is incorrect"} 
           show={showInvalidLoginMessage} 
         />
-        <button className="log-button btn-submit" type="submit">Login</button>
+        <button className="log-button btn-submit" type="submit" disabled={emptyInput}>Login</button>
         <h2>Don't have an account?</h2>
         <button className="log-button btn-link"><Link to={"/signup"}>Create an account</Link></button>
       </form>  

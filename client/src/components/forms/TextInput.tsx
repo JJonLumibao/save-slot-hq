@@ -16,10 +16,11 @@ export const TextInput = ({
   return (
     <>
       <div className="input-wrap">
-        <h2>{label}</h2>
+        <p className="input-header">{label}</p>
         <input 
           className={`${showError ? "invalid-input" : ""}`}
           type={type}
+          spellCheck={false}
           placeholder={placeholder}
           value={value}
           onChange={onChange}

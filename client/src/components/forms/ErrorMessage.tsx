@@ -5,5 +5,5 @@ export const ErrorMessage = ({
   message: string;
   show: boolean;
 }) => {
-  return show ? <div className="invalid-message">{message}</div> : <div></div>
+  return <div className={`invalid-message ${show ? "visible" : ""}`}>{message}</div>
 }

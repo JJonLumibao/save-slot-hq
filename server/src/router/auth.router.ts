@@ -1,61 +1,66 @@
 import { Router } from "express";
-import type { Request, Response, NextFunction } from "express";
+import type { Response } from "express";
 import { prisma } from "../db.setup.js"
 import { validateRequest } from "../middleware.js";
-import { email, z } from "zod";
+import { z } from "zod";
 import bcrypt from "bcrypt";
 import { createTokenForUser, createUnsecuredUserInfo, encryptPassword } from "../auth-utils.js";
-import { error } from "node:console";
 
 const authController = Router();
 
 // LOGIN ENDPOINT
-authController.post("/auth/login", validateRequest({
-  body: z.object({
-    username: z.string(),
-    password: z.string(),
-  }),
-}), async ({body: {username: bodyUsername, password: bodyPassword}}, res: Response) => {
-  const user = await prisma.user.findUnique({
-    where: {
-      username: bodyUsername,
+authController.post(
+  "/auth/login", 
+  validateRequest({
+    body: z.object({
+      username: z.string(),
+      password: z.string(),
+    }),
+  }), 
+  async ({body: {username: bodyUsername, password: bodyPassword}}, res: Response) => {
+    const user = await prisma.user.findUnique({
+      where: {
+        username: bodyUsername,
+      }
+    });
+
+    if(!user) {
+      return res.status(404).json({
+        error: "User not found",
+      });
     }
-  });
 
-  if(!user) {
-    return res.status(404).json({
-      error: "User not found",
+    const isPasswordValid = await bcrypt.compare(bodyPassword, user.passwordHash);
+
+    if(!isPasswordValid) {
+      return res.status(401).json({
+        error: "Invalid password",
+      });
+    }
+
+    const userInfo = createUnsecuredUserInfo(user);
+    const token = createTokenForUser(user);
+
+    return res.status(200).json({
+      message: "Login successful",
+      user: userInfo,
+      token: token, 
     });
   }
-
-  const isPasswordValid = await bcrypt.compare(bodyPassword, user.passwordHash);
-
-  if(!isPasswordValid) {
-    return res.status(401).json({
-      error: "Invalid password",
-    });
-  }
-
-  const userInfo = createUnsecuredUserInfo(user);
-  const token = createTokenForUser(user);
-
-  return res.status(200).json({
-    message: "Login successful",
-    user: userInfo,
-    token: token, 
-  });
-});
+);
 
 // REGISTER ENDPOINT
-authController.post("/auth/signup", validateRequest({
-  body: z.object({
-    firstName: z.string(),
-    lastName: z.string(),
-    username: z.string(),
-    email: z.email(),
-    password: z.string().min(8),
-  }),
-}), async ({
+authController.post(
+  "/auth/signup", 
+  validateRequest({
+    body: z.object({
+      firstName: z.string().min(2),
+      lastName: z.string().min(2),
+      username: z.string().min(2),
+      email: z.email(),
+      password: z.string().min(8),
+    }),
+  }), async ({
     body: {
       firstName: bodyFirstName,
       lastName: bodyLastName,

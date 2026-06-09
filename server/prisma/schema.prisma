@@ -23,6 +23,7 @@ model User {
   role         Role   @default(REGULAR)
 
   favorites    Game[] @relation("Favorites")
+  reviews      Review[]
 }
 
 model Game {
@@ -31,4 +32,17 @@ model Game {
   description  String
 
   favoritedBy  User[] @relation("Favorites")
+  reviews      Review[]
+}
+
+model Review {
+  id        Int   @id @default(autoincrement())
+  rating    Int
+  comment   String
+
+  userId    Int
+  gameId    Int
+
+  user      User @relation(fields: [userId], references: [id])
+  game      Game @relation(fields: [gameId], references: [id])
 }

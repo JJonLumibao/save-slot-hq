@@ -80,6 +80,7 @@ export const premiumVerification = async (
       error: "Premium membership required",
     });
   }
+  next();
 };
 
 export const adminVerification = async (
@@ -92,4 +93,5 @@ export const adminVerification = async (
       error: "Admin members only",
     });
   }
+  next();
 };

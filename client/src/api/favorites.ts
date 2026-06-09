@@ -4,5 +4,8 @@ export async function fetchFavorites(token: string) {
       Authorization: `Bearer ${token}`,
     },
   });
+
+  if (!res.ok) throw new Error("Failed to fetch all favorites");
+
   return res.json();
 }

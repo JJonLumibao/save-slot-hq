@@ -83,7 +83,12 @@ export function SignUpPage() {
 
   return (
     <div className="signup-page">
-      <h1>Sign Up Page</h1>
+      <header className="header">
+        <div className="header-container">
+          <h1 className="header-title">Save Slot HQ</h1>
+        </div>
+      </header>
+      <p className="form-header">Sign Up Page</p>
       <form className="signup-form"
         onSubmit={async (e) => {
           e.preventDefault();
@@ -173,8 +178,8 @@ export function SignUpPage() {
           }}
         />
         <button className="log-button btn-submit">Create account</button>
-        <h2>Have an account?</h2>
-        <button className="log-button btn-link"><Link to={"/login"}>Go to Login Page</Link></button>
+        <h2>Already have an account?</h2>
+        <button className="log-button btn-link"><Link to={"/login"}>Back to Login Page</Link></button>
       </form>
     </div>
   )
