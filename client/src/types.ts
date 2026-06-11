@@ -1,4 +1,5 @@
 export type User = {
+  id: number;
   firstName: string;
   lastName: string;
   username: string;
@@ -18,5 +19,9 @@ export type Review = {
   comment: string;
   user: {
     username: string;
+  }
+  game: {
+    id: number;
+    name: string;
   }
 }

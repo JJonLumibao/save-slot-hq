@@ -9,7 +9,7 @@ export const GameCard = ({
 }: {
   game: Game;
 }) => {
-  const { id, name, description } = game;
+  const { id, name } = game;
   const { token } = useAuth();
   const queryClient = useQueryClient();
   const [moreInfoVisible, setMoreInfoVisible] = useState(false);
@@ -51,7 +51,6 @@ export const GameCard = ({
     <>
       <div className="game-card">
         <h2>{name}</h2>
-        <p>{description}</p>
         <div className="game-btn-container">
           <i 
             className={`fa-solid ${isFavorited ? "fa-heart favorited" : "fa-heart-crack"}`} 

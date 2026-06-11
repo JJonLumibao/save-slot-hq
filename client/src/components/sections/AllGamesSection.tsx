@@ -20,7 +20,7 @@ export function AllGamesSection() {
     <section className="games-section">
       <h2>All Games ({allGames.length})</h2>
       <div className="games-container">
-        {!isLoading ? displayGames : <p>Loading games...</p>}
+        {!isLoading ? displayGames : <p className="section-status">Loading games...</p>}
       </div>
     </section>
   )

@@ -43,6 +43,6 @@ model Review {
   userId    Int
   gameId    Int
 
-  user      User @relation(fields: [userId], references: [id])
-  game      Game @relation(fields: [gameId], references: [id])
+  user      User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  game      Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
 }

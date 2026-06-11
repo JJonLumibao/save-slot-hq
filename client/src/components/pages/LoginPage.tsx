@@ -42,10 +42,10 @@ export function LoginPage() {
   }
 
   return (
-    <div className="login-page">
+    <div className="default-page login-page">
       <header className="header">
         <div className="header-container">
-          <h1 className="header-title">Save Slot HQ</h1>
+          <h1 className="header-title login-signup">Save Slot HQ</h1>
         </div>
       </header>
       <p className="form-header">Login Page</p>

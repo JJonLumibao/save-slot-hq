@@ -1,22 +1,22 @@
 import { useQuery } from "@tanstack/react-query"
-import { fetchReviews } from "../../api/reviews"
+import { fetchGameReviews } from "../../api/gameReviews"
 import type { Review } from "../../types"
 
-export const AllReviews = ({ gameId }: { gameId: number }) => {
-  const { data: allReviews = [], isLoading } = useQuery({
-    queryKey: ["reviews", gameId],
-    queryFn: () => fetchReviews(gameId),
+export const GameReviews = ({ gameId }: { gameId: number }) => {
+  const { data: gameReviews = [], isLoading } = useQuery({
+    queryKey: ["gameReviews", gameId],
+    queryFn: () => fetchGameReviews(gameId),
   });
 
   if (isLoading) return <p>Loading reviews...</p>;
 
   return (
-    <section className="all-reviews-container">
-      <h2>All Reviews ({allReviews.length})</h2>
+    <section className="game-reviews-container">
+      <h2>Reviews ({gameReviews.length})</h2>
 
       <div className="all-reviews-list">
-        {allReviews.length > 0 ? (
-          allReviews.map((review: Review) => (
+        {gameReviews.length > 0 ? (
+          gameReviews.map((review: Review) => (
             <div className="all-review-card" key={review.id}>
               <h3>{review.user?.username}</h3>
               {Array.from({ length: review.rating }).map(() => (

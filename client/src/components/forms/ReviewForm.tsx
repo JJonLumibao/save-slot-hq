@@ -93,8 +93,14 @@ export const ReviewForm = ({
           </button>
         </form>
       </div>
-      {user?.role !== "PREMIUM"
-        ? <div className="premium-block"></div>
+      {user?.role === "REGULAR"
+        ? <div className="premium-block">
+            <div className="premium-overlay"></div>
+            <div className="premium-message">
+              <i className="fa-solid fa-crown"></i>
+              <h3>Only premium members can leave a review</h3>
+            </div>
+          </div>
         : ""
       }
     </div>

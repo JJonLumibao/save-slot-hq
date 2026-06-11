@@ -40,7 +40,6 @@ export function SignUpPage() {
   const navigate = useNavigate();
 
   const handleSignup = async () => {
-    console.log("INSIDE HANDLE SIGNUP");
     const res = await fetch("http://localhost:3000/auth/signup", {
       method: "POST",
       headers: {
@@ -82,10 +81,10 @@ export function SignUpPage() {
   };
 
   return (
-    <div className="signup-page">
+    <div className="default-page signup-page">
       <header className="header">
         <div className="header-container">
-          <h1 className="header-title">Save Slot HQ</h1>
+          <h1 className="header-title login-signup">Save Slot HQ</h1>
         </div>
       </header>
       <p className="form-header">Sign Up Page</p>
@@ -114,7 +113,7 @@ export function SignUpPage() {
         <TextInput 
           label="First Name"
           type="text"
-          placeholder="i.e. John"
+          placeholder="e.g. John"
           value={firstNameInput}
           errorMessage={firstNameErrorMessage}
           showError={showFirstNameError}
@@ -125,7 +124,7 @@ export function SignUpPage() {
         <TextInput 
           label="Last Name"
           type="text"
-          placeholder="i.e. Smith"
+          placeholder="e.g. Smith"
           value={lastNameInput}
           errorMessage={lastNameErrorMessage}
           showError={showLastNameError}
@@ -136,7 +135,7 @@ export function SignUpPage() {
         <TextInput 
           label="Username"
           type="text"
-          placeholder="i.e. JohnSmith123"
+          placeholder="e.g. JohnSmith123"
           value={usernameInput}
           errorMessage={usernameErrorMessage}
           showError={showUsernameError}
@@ -169,7 +168,7 @@ export function SignUpPage() {
         <TextInput 
           label="Email"
           type="text"
-          placeholder="i.e. johnsmith@email.com"
+          placeholder="e.g. johnsmith@email.com"
           value={emailInput}
           errorMessage={emailErrorMessage}
           showError={showEmailError}

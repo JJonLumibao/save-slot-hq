@@ -24,7 +24,7 @@ export function FavoritesSection() {
     <section className="games-section favorites">
       <h2>Favorites ({favorites.length})</h2>
       <div className="games-container favorites">
-        {!isLoading ? displayGames : <p>Loading games...</p>}
+        {!isLoading ? displayGames : <p className="section-status">Loading games...</p>}
       </div>
     </section>
   )

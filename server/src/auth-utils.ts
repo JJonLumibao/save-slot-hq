@@ -10,9 +10,11 @@ export const encryptPassword = (password: string) => {
 
 export const createUnsecuredUserInfo = (user: User) => {
   return { 
+    id: user.id,
     firstName: user.firstName,
     lastName: user.lastName,
     username: user.username,
+    email: user.email,
     role: user.role
   }
 };
@@ -31,7 +33,7 @@ export const createTokenForUser = (user: User) => {
 };
 
 const jwtInfoSchema = z.object({
-  username: z.string(),
+  id: z.number(),
   iat: z.number(),
 });
 

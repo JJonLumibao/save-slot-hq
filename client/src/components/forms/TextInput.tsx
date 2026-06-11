@@ -18,7 +18,7 @@ export const TextInput = ({
       <div className="input-wrap">
         <p className="input-header">{label}</p>
         <input 
-          className={`${showError ? "invalid-input" : ""}`}
+          className={`input-wrap-input ${showError ? "invalid-input" : ""}`}
           type={type}
           spellCheck={false}
           placeholder={placeholder}

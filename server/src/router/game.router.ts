@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { prisma } from "../db.setup.js";
 import type { Request, Response } from "express";
-import { adminVerification, authMiddleware, premiumVerification } from "../middleware.js";
+import { adminVerification, authMiddleware, premiumOrAdminVerification } from "../middleware.js";
+import { error } from "node:console";
 
 const gameController = Router();
 
@@ -60,7 +61,7 @@ gameController.get(
 gameController.post(
   "/games/:gameId/reviews",
   authMiddleware,
-  premiumVerification,
+  premiumOrAdminVerification,
   async (req: Request, res: Response) => {
     const gameId = Number(req.params.gameId);
     const userId = req.user!.id;
@@ -77,7 +78,7 @@ gameController.post(
 
     return res.status(200).json(review);
   }
-)
+);
 
 gameController.post(
   "/games", 
@@ -94,8 +95,39 @@ gameController.post(
 
     return res.status(200).json(newGame);
   }
-)
+);
 
+gameController.delete(
+  "/games/:gameId",
+  authMiddleware,
+  adminVerification,
+  async (req: Request, res: Response) => {
+    const gameId = Number(req.params.gameId);
 
+    if (Number.isNaN(gameId)) {
+      return res.status(400).json({ error: "Invalid game id" });
+    }
+
+    const game = await prisma.game.findUnique({
+      where: {
+        id: gameId,
+      },
+    });
+
+    if (!game) {
+      return res.status(404).json({ error: "Game not found" });
+    }
+
+    await prisma.game.delete({
+      where: {
+        id: gameId,
+      }
+    });
+
+    return res.status(200).json({
+      message: `Game ${game.name} deleted successfully`,
+    });
+  }
+);
 
 export default gameController;

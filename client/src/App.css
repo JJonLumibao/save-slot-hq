@@ -6,11 +6,12 @@ body {
 }
 
 /* LOGIN PAGE */
-.login-page, .signup-page {
+.default-page {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
 }
 
 .login-form, .signup-form {
@@ -35,7 +36,7 @@ body {
   margin-bottom: 5px;
 }
 
-.input-wrap input {
+.input-wrap-input {
   border-radius: 6px;
   width: 250px;
   height: 30px;
@@ -44,7 +45,7 @@ body {
   margin: 5px 0;
 }
 
-.input-wrap input:focus, .review-text:focus {
+.input-wrap-input:focus, .review-text:focus {
   border-color: rgb(0, 47, 255);
   outline: none;
 }
@@ -113,6 +114,10 @@ a {
   align-items: center;
   margin: 0 30px;
 }
+
+.header-title:not(.login-signup) {
+  cursor: pointer;
+} 
 
 .account-container {
   display: flex;
@@ -201,13 +206,30 @@ a {
   text-align: center;
   border: 1px solid black;
   border-radius: 5px;
-  width: 150px;
-  height: 200px;
+  width: 180px;
+  height: 100px;
   padding: 20px;
-  overflow-wrap: break-word;
   background-image: linear-gradient(to top, rgb(194, 194, 194), white);
   transition: transform 0.2s ease;
   user-select: none;
+}
+
+.game-card h2 {
+  margin: 0;
+  height: 65%;
+  overflow-y: hidden;
+  overflow-wrap: anywhere;
+
+  mask-image: linear-gradient(
+    to bottom,
+    black 70%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 70%,
+    transparent 100%
+  );
 }
 
 .game-card:hover {
@@ -242,7 +264,7 @@ a {
   text-align: center;
 }
 
-/* MORE INFO */
+/* GAME MODAL */
 .game-modal {
   position: fixed;
   inset: 0;
@@ -267,15 +289,27 @@ a {
   z-index: 200;
   background-color: white;
   border: 1px solid black;
-  height: 85%;
-  width: 45%;
+  max-height: 85vh;
+  width: 85%;
   padding: 1.5rem;
+  overflow: hidden;
+}
+
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-right: 5px;
 }
 
 .btn-close-modal {
   position: absolute;
   top: 15px;
   right: 15px;
+  background-color: white;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -299,12 +333,17 @@ a {
   flex-direction: row;
   gap: 20px;
   justify-content: space-around;
-
 }
 
 .content-headings {
   display: flex;
   flex-direction: column;
+  width: 70%;
+}
+
+.content-header, 
+.content-description {
+  margin: 20px 0;
 }
 
 .content-header {
@@ -313,6 +352,7 @@ a {
 
 .content-description {
   font-size: 1.5rem;
+  overflow-wrap: anywhere;
 }
 
 .player-list-container {
@@ -350,6 +390,8 @@ a {
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  height: 25%;
+  width: 100%;
 }
 
 .review-container h2 {
@@ -402,24 +444,115 @@ a {
 
 .premium-block {
   position: absolute;
-  top: 20px;
-  backdrop-filter: blur(6px);
-  z-index: 500;
   width: 100%;
   height: 100%;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.premium-overlay {
+  backdrop-filter: blur(6px);
+  width: 105%;
+  height: 110%;
+}
+
+.premium-message {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-crown {
+  color: rgb(243, 207, 0);
+  font-size: 24px;
+  background-color: black;
+  padding: 9px 5px;
+  border-radius: 50%;
 }
 
 /* ALL REVIEWS */
+.game-reviews-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .all-reviews-list {
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
   height: 230px;
   gap: 10px;
+  width: 100%;
+  align-items: center;
 }
 
 .all-review-card {  
   border: 1px solid black;
   border-radius: 6px;
   padding: 5px 10px;
+  width: 80%;
+}
+
+.user-reviews-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-reviews-list {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  gap: 10px;
+}
+
+.user-review-card {  
+  border: 1px solid black;
+  border-radius: 6px;
+  padding: 20px 10px;
+  margin: 20px 0;
+}
+
+/* NEW GAME FORM */
+.new-game-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  width: 80%;
+}
+
+.game-name {
+  width: 400px;
+}
+
+.game-description {
+  width: 400px;
+  height: 200px;
+}
+
+/* MANAGE USERS PAGE */
+.all-users-table {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+}
+
+.all-users-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  align-items: center;
+}
+
+.all-users-header {
+  font-weight: bold;
+  background-color: #f2f2f2;
 }

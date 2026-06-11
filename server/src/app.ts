@@ -5,6 +5,7 @@ import authController from "./router/auth.router.js"
 import userController from "./router/user.router.js";
 import "dotenv/config"
 import gameController from "./router/game.router.js";
+import reviewController from "./router/review.router.js";
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(authController);
 app.use(userController);
 app.use(gameController);
+app.use(reviewController);
 
 declare global {
   namespace Express {

@@ -94,7 +94,7 @@ authController.post(
     if(Object.keys(errors).length > 0) {
       return res.status(409).json({ errors });
     }
-
+    
     const hashedPassword = await encryptPassword(bodyPassword);
 
     const user = await prisma.user.create({

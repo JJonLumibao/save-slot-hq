@@ -2,7 +2,6 @@ import type { Request, Response, NextFunction } from "express";
 import { z } from "zod";
 import { getDataFromAuthToken } from "./auth-utils.js";
 import { prisma } from "./db.setup.js"
-import { error } from "node:console";
 
 type RequestSchemas = {
   body?: z.ZodTypeAny;
@@ -58,7 +57,7 @@ export const authMiddleware = async (
 
   const userFromJwt = await prisma.user.findFirst({
     where: {
-      username: myJwtData.username,
+      id: myJwtData.id,
     },
   });
   if (!userFromJwt) {
@@ -70,19 +69,6 @@ export const authMiddleware = async (
   next();
 };
 
-export const premiumVerification = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
-  if (req.user?.role !== "PREMIUM") {
-    return res.status(403).json({
-      error: "Premium membership required",
-    });
-  }
-  next();
-};
-
 export const adminVerification = async (
   req: Request,
   res: Response,
@@ -91,6 +77,22 @@ export const adminVerification = async (
   if (req.user?.role !== "ADMIN") {
     return res.status(403).json({
       error: "Admin members only",
+    });
+  }
+  next();
+};
+
+export const premiumOrAdminVerification = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  if (
+    req.user?.role !== "PREMIUM" && 
+    req.user?.role !== "ADMIN"
+  ) {
+    return res.status(403).json({
+      error: "Premium or admin access required",
     });
   }
   next();
