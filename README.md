@@ -1,23 +1,54 @@
 # Save Slot
 
-Save Slot is a full-stack web application that allows users to browse games, create accounts, and save their favorite games to a personalized collection.
+Save Slot is a full-stack web application that allows users to interact with a collection of games managed by administrators. Users can create accounts, favorite games, leave reviews, and manage their profiles based on their assigned role.
 
-THIS PROJECT IS CURRENTLY UNDER DEVELOPMENT
+> This project was built as a portfolio project to demonstrate full-stack web development skills using React, TypeScript, Express, Prisma, PostgreSQL, authentication, authorization, and role-based access control.
 
 ## Features
 
-* User registration and authentication
+### Authentication & Security
+
+* User registration and login
 * Secure password hashing with bcrypt
 * JWT-based authentication
-* Browse available games
-* Add and remove favorite games
-* Role-based user system
-  * Regular
-  * Premium
-  * Admin
-* PostgreSQL database with Prisma ORM
-* React + TypeScript frontend
-* Express + TypeScript backend
+* Protected API routes
+* Role-based authorization middleware
+
+### User Features (Regular)
+
+* Create an account
+* Log in and log out
+* Browse all games
+* Favorite and unfavorite games
+* View game reviews
+* Update account information
+
+### Premium Features
+
+Includes all Regular permissions, plus:
+
+* Create reviews for games
+* Delete own reviews
+
+### Admin Features
+
+Includes all Premium permissions, plus:
+
+* Add new games
+* Delete games
+* View all reviews across the platform
+* Delete any review
+* View all users
+* Change user roles
+* Delete users
+
+### Database & Backend
+
+* PostgreSQL database
+* Prisma ORM
+* Relational data modeling
+* Cascade deletion for related records
+* Input validation with Zod
 
 ## Tech Stack
 
@@ -26,7 +57,9 @@ THIS PROJECT IS CURRENTLY UNDER DEVELOPMENT
 * React
 * TypeScript
 * React Router
+* TanStack Query (React Query)
 * React Hot Toast
+* CSS
 
 ### Backend
 
@@ -37,6 +70,7 @@ THIS PROJECT IS CURRENTLY UNDER DEVELOPMENT
 * PostgreSQL
 * JWT
 * bcrypt
+* Zod
 
 ## Installation
 
@@ -95,7 +129,7 @@ Run Prisma migrations:
 npx prisma migrate dev
 ```
 
-(Optional) Seed the database (I provided a seed.ts to fill user and game databases):
+(Optional: seed.ts provided) Seed the database:
 
 ```bash
 npm run seed
@@ -149,18 +183,39 @@ save-slot/
 
 ### Games
 
-| Method | Endpoint |
-| ------ | -------- |
-| GET    | /games   |
+| Method | Endpoint                   |
+| ------ | -------------------------- |
+| GET    | /games                     |
+| GET    | /games/:gameId/reviews     |
+| GET    | /games/:gameId/favoritedBy |
+| POST   | /games                     |
+| POST   | /games/:gameId/reviews     |
+| DELETE | /games/:gameId             |
 
-### Favorites
+### Reviews
+
+| Method | Endpoint           |
+| ------ | ------------------ |
+| GET    | /reviews           |
+| DELETE | /reviews/:reviewId |
+
+### Users
 
 | Method | Endpoint                 |
 | ------ | ------------------------ |
+| GET    | /users                   |
 | GET    | /users/favorites         |
+| GET    | /users/:userId/reviews   |
+| PATCH  | /users/:userId           |
+| PATCH  | /users/:userId/role      |
 | PATCH  | /users/favorites/:gameId |
+| DELETE | /users/:userId           |
 | DELETE | /users/favorites/:gameId |
 
+## Future Improvements
+
+* Responsive website
+* Final touch ups
 
 ## License
 
