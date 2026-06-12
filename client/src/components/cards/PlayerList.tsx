@@ -28,9 +28,9 @@ export const PlayerList = ({
           {u.username}
         </div>
       ))
-      : <p className="section-status">
+      : <div className="empty-player-list">
           No player has added this game to their favorites
-        </p>
+        </div>
 
   return (
     <>

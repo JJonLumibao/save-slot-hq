@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ErrorMessage } from "../forms/ErrorMessage";
 import { useAuth } from "../../context/AuthContext";
 import { TextInput } from "../forms/TextInput";
@@ -87,9 +87,14 @@ export function LoginPage() {
           message={"Username or password is incorrect"} 
           show={showInvalidLoginMessage} 
         />
-        <button className="log-button btn-submit" type="submit" disabled={emptyInput}>Login</button>
+        <button className="log-button btn-submit" type="submit" disabled={emptyInput}>Sign In</button>
         <h2>Don't have an account?</h2>
-        <button className="log-button btn-link"><Link to={"/signup"}>Create an account</Link></button>
+        <button 
+          className="log-button btn-link" 
+          onClick={() =>navigate("/signup")}
+        >
+          Create an account
+        </button>
       </form>  
     </div>
   )

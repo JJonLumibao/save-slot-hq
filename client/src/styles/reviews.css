@@ -1,0 +1,142 @@
+.review-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  height: 25%;
+  width: 100%;
+}
+
+.review-container h2 {
+  margin: 0;
+}
+
+.rating-review {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.star-click {
+  position: relative;
+  z-index: 251;
+  cursor: pointer;
+  font-size: 20px;
+  left: -25px;
+}
+
+.selected-star {
+  color: yellow;
+}
+
+.star-border {
+  position: relative;
+  left: 25px;
+  z-index: 250;
+  font-size: 28px;
+}
+
+.comment-review {
+  width: 100%;
+}
+
+.comment-review form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.review-text {
+  padding: 10px;
+  border-radius: 6px;
+  width: 80%;
+  height: 50px;
+}
+
+.premium-block {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.premium-overlay {
+  backdrop-filter: blur(6px);
+  width: 105%;
+  height: 110%;
+}
+
+.premium-message {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-crown {
+  color: rgb(243, 207, 0);
+  font-size: 24px;
+  background-color: black;
+  padding: 9px 5px;
+  border-radius: 50%;
+}
+
+/* ALL REVIEWS */
+.game-reviews-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.all-reviews-list {
+  display: flex;
+  flex-direction: column;
+  height: 230px;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+}
+
+.all-review-card {  
+  position: relative;
+  border: 1px solid black;
+  border-radius: 6px;
+  padding: 5px 10px;
+  width: 80%;
+}
+
+.review-trash {
+  position: absolute;
+  top: 12px;
+  right: 8px;
+}
+
+.user-reviews-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-reviews-list {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  gap: 10px;
+}
+
+.user-review-card {  
+  position: relative;
+  border: 1px solid black;
+  border-radius: 6px;
+  padding: 20px 10px;
+  margin: 20px 0;
+}

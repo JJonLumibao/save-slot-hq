@@ -27,6 +27,7 @@ export const Header = () => {
           className="account-wrapper"
           onMouseEnter={() => setOpenMenu(true)}
           onMouseLeave={() => setOpenMenu(false)}
+          onClick={() => setOpenMenu(!openMenu)}
         >
           <div className="account-container">
             <i className="fa-solid fa-circle-user"/>
@@ -39,6 +40,7 @@ export const Header = () => {
             className={`page-options ${openMenu ? "visible" : ""}`}
             onMouseEnter={() => setOpenMenu(true)}
             onMouseLeave={() => setOpenMenu(false)}
+            onClick={() => setOpenMenu(!openMenu)}
           >
             <div className="option" onClick={() => navigate("/account")}>Account Details</div>
             {user?.role === "PREMIUM"
@@ -48,7 +50,7 @@ export const Header = () => {
             {user?.role === "ADMIN"
               ? 
                 <>
-                  <div className="option" onClick={() => navigate("/manage-user-roles")}>Manage User Roles</div>
+                  <div className="option" onClick={() => navigate("/manage-users")}>Manage Users</div>
                   <div className="option" onClick={() => navigate("/add-new-game")}>Add New Game</div>
                   <div className="option" onClick={() => navigate("/all-reviews")}>All Reviews</div>
                 </>

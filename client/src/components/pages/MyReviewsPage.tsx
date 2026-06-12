@@ -1,68 +1,50 @@
-import { useQuery } from "@tanstack/react-query"
-import { fetchUserReviews } from "../../api/userReviews"
-import type { Review } from "../../types"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { fetchUserReviews } from "../../api/reviews"
 import { Header } from "../sections/Header";
 import { useAuth } from "../../context/AuthContext";
-
-type GroupedReview = {
-  gameId: number;
-  gameName: string;
-  reviews: Review[];
-}
+import toast from "react-hot-toast";
+import { GroupedReviewList } from "../cards/GroupedReviewList";
 
 export function MyReviewsPage () {
+  const queryClient = useQueryClient();
   const { user, token } = useAuth();
   const { data: userReviews = [], isLoading } = useQuery({
     queryKey: ["userReviews", user?.id],
-    enabled: !!user?.id && !!token,
+    enabled: user?.role === "PREMIUM" && !!token,
     queryFn: () => fetchUserReviews(user!.id, token!),
   });
 
- const groupedMap = new Map<number, GroupedReview>();
-
-  userReviews.forEach((review: Review) => {
-    const gameId = review.game.id;
-
-    if (!groupedMap.has(gameId)) {
-      groupedMap.set(gameId, {
-        gameId,
-        gameName: review.game.name,
-        reviews: [],
+  const handleDelete = useMutation({
+    mutationFn: async (reviewId: number) => {
+      const res = await fetch(`http://localhost:3000/reviews/${reviewId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
-    }
+      if (!res.ok) {
+        toast.error("Failed to delete review");
+        throw new Error("Failed to delete review");
+      }
 
-    groupedMap.get(gameId)!.reviews.push(review);
+      return res.json();
+    },
+    onSuccess: () => {
+      toast.success("Review deleted successfully");
+      queryClient.invalidateQueries({ queryKey: ["userReviews", user?.id]});
+    }
   });
   
-  const groupedReviews = Array.from(groupedMap.values());
-
   return (
     <>
       <Header />    
       {isLoading && <p className="section-status">Loading reviews...</p>}
-      <div className="user-reviews-container">
-        <h2 className="form-header">My Reviews ({userReviews.length})</h2>
-
-        <div className="user-reviews-list">
-          {groupedReviews.length > 0 ? (
-            groupedReviews.map((group: GroupedReview) => (
-              <div key={group.gameId} className="game-review-group">
-                <h3>{group.gameName}</h3>
-                {group.reviews.map((review) => (
-                  <div className="user-review-card" key={review.id}>
-                    {Array.from({ length: review.rating }).map(() => (
-                      <i className="fa-solid fa-star" />
-                    ))}
-                    <p>{review.comment}</p>
-                  </div>
-                ))}
-              </div>
-            ))
-          ) : (
-            <p>You don't have any reviews!</p>
-          )}
-        </div>
-      </div>
+      <GroupedReviewList 
+        title={"My Reviews"}
+        reviews={userReviews}
+        showUsername={false}
+        onDelete={(reviewId) => handleDelete.mutate(reviewId)}
+      />
     </>
   );
 };

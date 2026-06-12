@@ -1,0 +1,103 @@
+.games-section {
+  display: flex;
+  flex-direction: column;
+  margin: 50px 100px;
+}
+
+.games-section.favorites {
+  margin-top: 100px;
+}
+
+.games-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.game-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 180px;
+  height: 100px;
+  padding: 20px;
+  background-image: linear-gradient(to top, rgb(194, 194, 194), white);
+  transition: transform 0.2s ease;
+  user-select: none;
+}
+
+.game-card h2 {
+  margin: 0;
+  height: 65%;
+  overflow-y: hidden;
+  overflow-wrap: anywhere;
+
+  mask-image: linear-gradient(
+    to bottom,
+    black 70%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 70%,
+    transparent 100%
+  );
+}
+
+.game-card:hover {
+  transform: scale(1.03);
+}
+
+.game-btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.fa-heart, 
+.fa-heart-crack, 
+.fa-trash-can {
+  font-size: 20px;
+  color: black;
+  cursor: pointer;
+  transition: transfrom 0.3s ease, color 0.2s ease;
+}
+
+.fa-heart.favorited {
+  color: red;
+}
+
+.fa-heart:hover, 
+.fa-heart-crack:hover {
+  color: rgb(219, 119, 136);
+  animation: heartbeat 1s ease infinite;
+}
+
+.fa-trash-can:hover {
+  color: rgb(238, 115, 0);
+  animation: shake 0.5s ease infinite;
+}
+
+/* NEW GAME FORM */
+.new-game-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  width: 80%;
+}
+
+.game-name {
+  width: 400px;
+}
+
+.game-description {
+  width: 400px;
+  height: 200px;
+}

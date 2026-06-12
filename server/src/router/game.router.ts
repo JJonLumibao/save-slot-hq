@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { prisma } from "../db.setup.js";
 import type { Request, Response } from "express";
-import { adminVerification, authMiddleware, premiumOrAdminVerification } from "../middleware.js";
-import { error } from "node:console";
+import { adminVerification, authMiddleware, premiumOrAdminVerification, validateRequest } from "../middleware.js";
+import z from "zod";
 
 const gameController = Router();
 
@@ -18,19 +18,22 @@ gameController.get(
   "/games/:gameId/favoritedBy", 
   async (req: Request, res: Response) => {
     const gameId = Number(req.params.gameId);
+    
+    if (Number.isNaN(gameId)) {
+      return res.status(400).json({ error: "Invalid game id" });
+    }
+
     const game = await prisma.game.findUnique({
-      where: {
-        id: gameId,
+      where: { 
+        id: gameId, 
       },
-      include: {
-        favoritedBy: true,
+      include: { 
+        favoritedBy: true, 
       },
     });
 
     if (!game) {
-      return res.status(404).send({
-        error: "Game not found",
-      });
+      return res.status(404).json({ error: "Game not found" });
     }
 
     return res.json(game.favoritedBy);
@@ -41,9 +44,24 @@ gameController.get(
   "/games/:gameId/reviews",
   async (req: Request, res: Response) => {
     const gameId = Number(req.params.gameId);
+
+    if (Number.isNaN(gameId)) {
+      return res.status(400).json({ error: "Invalid game id" });
+    }
+
+    const game = await prisma.game.findUnique({
+      where: { 
+        id: gameId 
+      },
+    });
+
+    if (!game) {
+      return res.status(404).json({ error: "Game not found" });
+    }
+
     const reviews = await prisma.review.findMany({
-      where: {
-        gameId,
+      where: { 
+        gameId, 
       },
       include: {
         user: {
@@ -63,9 +81,28 @@ gameController.post(
   authMiddleware,
   premiumOrAdminVerification,
   async (req: Request, res: Response) => {
+    
+    if (!req.user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
     const gameId = Number(req.params.gameId);
-    const userId = req.user!.id;
+    const userId = req.user.id;
     const { rating, comment } = req.body;
+
+    if (Number.isNaN(gameId)) {
+      return res.status(400).json({ error: "Invalid game id" });
+    }
+
+    const game = await prisma.game.findUnique({
+      where: { 
+        id: gameId 
+      },
+    });
+
+    if (!game) {
+      return res.status(404).json({ error: "Game not found" });
+    }
 
     const review = await prisma.review.create({
       data: {
@@ -84,12 +121,21 @@ gameController.post(
   "/games", 
   authMiddleware,
   adminVerification,
-  async (req: Request, res: Response) => {
-    const { name, description } = req.body;
+  validateRequest({
+    body: z.object({
+      name: z.string().max(30),
+      description: z.string().max(100),
+    })
+  }), async ({
+    body: {
+      name: bodyName,
+      description: bodyDesciption,
+    }
+  }, res: Response) => {
     const newGame = await prisma.game.create({
       data: {
-        name,
-        description,
+        name: bodyName,
+        description: bodyDesciption,
       },
     });
 

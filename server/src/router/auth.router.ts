@@ -25,8 +25,8 @@ authController.post(
     });
 
     if(!user) {
-      return res.status(404).json({
-        error: "User not found",
+      return res.status(401).json({
+        error: "Invalid credentials",
       });
     }
 
@@ -34,7 +34,7 @@ authController.post(
 
     if(!isPasswordValid) {
       return res.status(401).json({
-        error: "Invalid password",
+        error: "Invalid credentials",
       });
     }
 
@@ -54,9 +54,9 @@ authController.post(
   "/auth/signup", 
   validateRequest({
     body: z.object({
-      firstName: z.string().min(2),
-      lastName: z.string().min(2),
-      username: z.string().min(2),
+      firstName: z.string().min(2).max(30),
+      lastName: z.string().min(2).max(30),
+      username: z.string().min(2).max(20),
       email: z.email(),
       password: z.string().min(8),
     }),
@@ -94,28 +94,32 @@ authController.post(
     if(Object.keys(errors).length > 0) {
       return res.status(409).json({ errors });
     }
-    
-    const hashedPassword = await encryptPassword(bodyPassword);
 
-    const user = await prisma.user.create({
-      data: {
-        firstName: bodyFirstName,
-        lastName: bodyLastName,
-        username: bodyUsername,
-        email: bodyEmail,
-        passwordHash: hashedPassword,
-        role: "REGULAR",
-      },
-    });
-
-    const userInfo = createUnsecuredUserInfo(user);
-    const token = createTokenForUser(user);
-
-    return res.status(201).json({
-      message: "Sign up successful",
-      user: userInfo,
-      token: token,
-    });
+    try {
+      const hashedPassword = await encryptPassword(bodyPassword);
+  
+      const user = await prisma.user.create({
+        data: {
+          firstName: bodyFirstName,
+          lastName: bodyLastName,
+          username: bodyUsername,
+          email: bodyEmail,
+          passwordHash: hashedPassword,
+          role: "REGULAR",
+        },
+      });
+  
+      const userInfo = createUnsecuredUserInfo(user);
+      const token = createTokenForUser(user);
+  
+      return res.status(201).json({
+        message: "Sign up successful",
+        user: userInfo,
+        token: token,
+      });
+    } catch (e) {
+      return res.status(409).json({ error: "Username or email already exists" });
+    } 
   }
 );
 

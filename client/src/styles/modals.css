@@ -1,0 +1,156 @@
+.game-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(6px);
+}
+
+.content-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+  background-color: white;
+  border: 1px solid black;
+  max-height: 85vh;
+  width: 85%;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-right: 5px;
+}
+
+.btn-close-modal {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  transition: transform 0.2s ease;
+}
+
+.btn-close-modal:hover {
+  transform: scale(1.08);
+}
+
+.fa-circle-xmark {
+  display: flex;
+  font-size: 30px;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: space-around;
+}
+
+.content-headings {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.content-header, 
+.content-description {
+  margin: 20px 0;
+}
+
+.content-header {
+  font-size: 3rem;
+}
+
+.content-description {
+  font-size: 1.5rem;
+  overflow-wrap: anywhere;
+}
+
+.confirm-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  width: 40%;
+}
+
+.confirm-header,
+.confirm-description,
+.confirm-data {
+  margin: 5px 0;
+}
+
+.confirm-data {
+  font-size: 1.2rem;
+  color: red;
+}
+
+.btn-delete {
+  margin-top: 20px;
+}
+
+.btn-delete:hover {
+  color: white;
+  background-color: red;
+  cursor: pointer;
+}
+
+.player-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 250px;
+  width: 250px;
+  margin-bottom: 20px;
+}
+
+.player-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(189, 189, 189);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.player-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 30px;
+  background-image: linear-gradient(to top, rgb(194, 194, 194), white);
+  border: 1px solid black;
+}
+
+.empty-player-list {
+  width: 80%;
+  text-align: center;
+  margin-top: 30px;
+}

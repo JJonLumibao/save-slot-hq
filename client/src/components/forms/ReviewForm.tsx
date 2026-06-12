@@ -41,7 +41,7 @@ export const ReviewForm = ({
       setRating(0);
       setComment("");
       queryClient.invalidateQueries({
-        queryKey: ["reviews", gameId],
+        queryKey: ["gameReviews", gameId],
       })
     }
   });
@@ -74,6 +74,7 @@ export const ReviewForm = ({
             if (rating === 0) return;
             handleSubmit.mutate();
           }}>
+          <div className="remaining-counter comm-counter">{100 - comment.length}</div>
           <textarea 
             className="review-text"
             placeholder="Type your comment here..."

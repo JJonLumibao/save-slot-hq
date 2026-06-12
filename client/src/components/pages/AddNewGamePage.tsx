@@ -64,10 +64,12 @@ export function AddNewGamePage() {
       >
         <div className="input-wrap">
           <div className="input-header">Game Name</div>
+          <div className="remaining-counter">{30 - gameName.length}</div>
           <input 
             className="input-wrap-input game-name"
             type="text" 
             placeholder="e.g. Snowball Fight"
+            maxLength={30}
             value={gameName}
             onChange={(e) => setGameName(e.target.value)}
             disabled={handleSubmit.isPending}
@@ -75,16 +77,18 @@ export function AddNewGamePage() {
         </div>
         <div className="input-wrap">
           <div className="input-header">Game Description</div>
+          <div className="remaining-counter desc-counter">{100 - gameDescription.length}</div>
           <textarea 
             className="input-wrap-input game-description"
             placeholder="e.g. 3D competitive multiplayer snowball fight simulator"
+            maxLength={100}
             value={gameDescription}
             onChange={(e) => setGameDescription(e.target.value)}
             disabled={handleSubmit.isPending}
           />
         </div>
         <button 
-          className="log-button" 
+          className="btn-save" 
           type="submit" 
           disabled={handleSubmit.isPending || emptyInput}
         >

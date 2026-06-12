@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { isEmailValid } from "../utils";
 import { TextInput } from "../forms/TextInput";
 import { capitalize } from "../utils";
@@ -114,6 +114,7 @@ export function SignUpPage() {
           label="First Name"
           type="text"
           placeholder="e.g. John"
+          maxLength={30}
           value={firstNameInput}
           errorMessage={firstNameErrorMessage}
           showError={showFirstNameError}
@@ -125,6 +126,7 @@ export function SignUpPage() {
           label="Last Name"
           type="text"
           placeholder="e.g. Smith"
+          maxLength={30}
           value={lastNameInput}
           errorMessage={lastNameErrorMessage}
           showError={showLastNameError}
@@ -136,6 +138,7 @@ export function SignUpPage() {
           label="Username"
           type="text"
           placeholder="e.g. JohnSmith123"
+          maxLength={20}
           value={usernameInput}
           errorMessage={usernameErrorMessage}
           showError={showUsernameError}
@@ -178,7 +181,12 @@ export function SignUpPage() {
         />
         <button className="log-button btn-submit">Create account</button>
         <h2>Already have an account?</h2>
-        <button className="log-button btn-link"><Link to={"/login"}>Back to Login Page</Link></button>
+        <button 
+          className="log-button btn-link"
+          onClick={() => navigate("/login")}
+        >
+          Back to Login Page
+        </button>
       </form>
     </div>
   )

@@ -1,0 +1,84 @@
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.default-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.section-status {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.log-button, .btn-delete, .btn-save {
+  width: 150px;
+  border: 1px solid;
+  border-radius: 6px;
+  padding: 5px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-submit, .btn-save {
+  margin-top: 30px;
+}
+
+.btn-more-info {
+  background-color: white;
+  border-radius: 6px;
+  padding: 6px;
+  transition: all 0.3s ease;
+}
+
+.log-button:hover:not([disabled]), .btn-more-info:hover {
+  color: white;
+  background-color: blue;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.btn-save:hover:not([disabled]) {
+  color: white;
+  background-color: rgb(0, 199, 0);
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.invalid-message {
+  color: white;
+  user-select: none;
+}
+
+.invalid-message.visible {
+  color: red;
+  font-size: 0.9rem;
+}
+
+.invalid-input {
+  border-color: red;
+  background-color: pink;
+  outline: none;
+}
+
+.remaining-counter {
+  position: absolute;
+  top: 52px;
+  right: 8px;
+  color: gray;
+  font-size: 0.9rem;
+}
+
+.desc-counter {
+  top: 225px
+}
+
+.comm-counter {
+  right: 10%;
+}

@@ -137,6 +137,7 @@ export function AccountDetailsPage() {
           label="First Name"
           type="text"
           placeholder="i.e. John"
+          maxLength={30}
           value={firstNameInput}
           errorMessage={firstNameErrorMessage}
           showError={showFirstNameError}
@@ -148,6 +149,7 @@ export function AccountDetailsPage() {
           label="Last Name"
           type="text"
           placeholder="i.e. Smith"
+          maxLength={30}
           value={lastNameInput}
           errorMessage={lastNameErrorMessage}
           showError={showLastNameError}
@@ -159,6 +161,7 @@ export function AccountDetailsPage() {
           label="Username"
           type="text"
           placeholder="i.e. JohnSmith123"
+          maxLength={20}
           value={usernameInput}
           errorMessage={usernameErrorMessage}
           showError={showUsernameError}
@@ -202,7 +205,7 @@ export function AccountDetailsPage() {
           }}
         />
         <button 
-          className="log-button btn-submit"
+          className="btn-save"
           disabled={isSaving}
         >
           {isSaving ? "Saving..." : "Save Changes"}

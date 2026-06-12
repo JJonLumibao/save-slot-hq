@@ -25,3 +25,10 @@ export type Review = {
     name: string;
   }
 }
+
+export type ManageUser = {
+  id: number,
+  username: string,
+  email: string,
+  role: "REGULAR" | "PREMIUM" | "ADMIN",
+}

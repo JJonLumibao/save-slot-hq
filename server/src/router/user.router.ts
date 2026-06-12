@@ -28,7 +28,12 @@ userController.get(
   "/users/favorites", 
   authMiddleware,
   async (req: Request, res: Response) => {
-    const userId = req.user!.id;
+    
+    if (!req.user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const userId = req.user.id;
     const user = await prisma.user.findUnique({
       where: {
         id: userId,
@@ -45,7 +50,12 @@ userController.get(
   "/users/:userId/reviews",
   authMiddleware,
   async (req: Request, res: Response) => {
-    const userId = req.user!.id;
+    
+    if (!req.user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const userId = req.user.id;
     const user = await prisma.user.findUnique({
       where: {
         id: userId,
@@ -66,8 +76,17 @@ userController.patch(
   "/users/favorites/:gameId",
   authMiddleware,
   async (req: Request, res: Response) => {
-    const userId = req.user!.id
+    
+    if (!req.user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const userId = req.user.id
     const gameId = Number(req.params.gameId);
+
+    if (Number.isNaN(gameId)) {
+      return res.status(400).json({ error: "Invalid game id" });
+    }
 
     const updatedUser = await prisma.user.update({
       where: {
@@ -92,7 +111,12 @@ userController.patch(
   "/users/:userId",
   authMiddleware,
   async (req: Request, res: Response) => {
-    const userId = req.user!.id;
+    
+    if (!req.user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const userId = req.user.id;
     const { firstName, lastName, username, password, email } = req.body;
 
     const errors: Record<string, string> = {};
@@ -192,7 +216,12 @@ userController.delete(
   "/users/favorites/:gameId",
   authMiddleware,
   async (req: Request, res: Response) => {
-    const userId = req.user!.id;
+    
+    if (!req.user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const userId = req.user.id;
     const gameId = Number(req.params.gameId);
 
     const updatedUser = await prisma.user.update({
@@ -219,6 +248,11 @@ userController.delete(
   authMiddleware,
   adminVerification,
   async (req: Request, res: Response) => {
+    
+    if (!req.user) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
     const selectedUserId = Number(req.params.userId);
 
     if (Number.isNaN(selectedUserId)) {
@@ -235,7 +269,7 @@ userController.delete(
       return res.status(404).json({ error: "User not found" });
     }
 
-    if (selectedUserId === req.user!.id) {
+    if (selectedUserId === req.user.id) {
       return res.status(400).json({ error: "You cannot delete your own account" });
     }
 

@@ -1,4 +1,12 @@
-import './App.css'
+import './styles/admin.css';
+import './styles/animations.css';
+import './styles/auth.css';
+import './styles/games.css';
+import './styles/globals.css';
+import './styles/header.css';
+import './styles/modals.css';
+import './styles/reviews.css';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { LoginPage } from './components/pages/LoginPage'
 import { SignUpPage } from './components/pages/SignUpPage'
@@ -8,7 +16,7 @@ import { MyReviewsPage } from './components/pages/MyReviewsPage'
 import { AllReviewsPage } from './components/pages/AllReviewsPage'
 import { Toaster } from 'react-hot-toast'
 import { AddNewGamePage } from './components/pages/AddNewGamePage'
-import { ManageUserRolesPage } from './components/pages/ManageUserRolesPage'
+import { ManageUsersPage } from './components/pages/ManageUsersPage'
 
 export default function App() {
   return (
@@ -23,13 +31,8 @@ export default function App() {
         <Route path="/my-reviews" element={<MyReviewsPage />}></Route>
         <Route path="/all-reviews" element={<AllReviewsPage />}></Route>
         <Route path="/add-new-game" element={<AddNewGamePage />}></Route>
-        <Route path="/manage-user-roles" element={<ManageUserRolesPage />}></Route>
+        <Route path="/manage-users" element={<ManageUsersPage />}></Route>
       </Routes>
     </BrowserRouter>
   )
 }
-
-// Backend: npm run dev
-// Studio: npx prisma studio
-// Seed: npm run seed
-// Client: npm run dev
