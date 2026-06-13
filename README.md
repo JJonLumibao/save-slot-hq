@@ -29,6 +29,7 @@ Includes all Regular permissions, plus:
 
 * Create reviews for games
 * Delete own reviews
+* Previously created reviews remain visible if the user's role is later changed back to "REGULAR"
 
 ### Admin Features
 
@@ -135,6 +136,14 @@ npx prisma migrate dev
 npm run seed
 ```
 
+After running seed.ts, three accounts of each role are made available. Here's one from each role:
+
+| Role    | Username   | Password    |
+| ------- | ---------- | ----------- |
+| Regular | ReggieReg  | regpassword |
+| Premium | PreeshaPre | prepassword |
+| Admin   | AdamAdm    | adapassword |
+
 Generate Prisma Client:
 
 ```bash
@@ -171,6 +180,16 @@ save-slot/
 │
 └── README.md
 ```
+
+## Business Rules
+
+* Users can only review games while assigned the "PREMIUM" or "ADMIN" role
+* Reviews remain visible even if a user's role is later downgraded to "REGULAR"
+* "PREMIUM" users can only delete their own reviews unless they are an "ADMIN"
+* "ADMIN" users cannot delete their own accounts
+* At least one "ADMIN" account must always exist
+* Deleting a game automatically removes associated reviews
+* Deleting a user automatically removes associated reviews
 
 ## API Endpoints
 
@@ -211,11 +230,6 @@ save-slot/
 | PATCH  | /users/favorites/:gameId |
 | DELETE | /users/:userId           |
 | DELETE | /users/favorites/:gameId |
-
-## Future Improvements
-
-* Responsive website
-* Final touch ups
 
 ## License
 

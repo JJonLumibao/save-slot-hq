@@ -11,6 +11,7 @@ export const ReviewForm = ({
   const { token, user } = useAuth();
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+  const canReview = user?.role === "PREMIUM" || user?.role === "ADMIN";
 
   const handleSubmit = useMutation({
     mutationFn: async () => {
@@ -59,7 +60,7 @@ export const ReviewForm = ({
                 star <= rating ? "selected-star" : ""
               }`}
               onClick={() => {
-                if(!handleSubmit.isPending) {
+                if(!handleSubmit.isPending && canReview) {
                   setRating(star);
                 }
               }}
@@ -94,7 +95,7 @@ export const ReviewForm = ({
           </button>
         </form>
       </div>
-      {user?.role === "REGULAR"
+      {!canReview
         ? <div className="premium-block">
             <div className="premium-overlay"></div>
             <div className="premium-message">

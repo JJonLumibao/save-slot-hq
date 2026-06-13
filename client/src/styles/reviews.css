@@ -23,7 +23,7 @@
   z-index: 251;
   cursor: pointer;
   font-size: 20px;
-  left: -25px;
+  left: -5.2%;
 }
 
 .selected-star {
@@ -32,7 +32,7 @@
 
 .star-border {
   position: relative;
-  left: 25px;
+  left: 5.2%;
   z-index: 250;
   font-size: 28px;
 }

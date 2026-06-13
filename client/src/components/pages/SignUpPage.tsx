@@ -82,7 +82,7 @@ export function SignUpPage() {
 
   return (
     <div className="default-page signup-page">
-      <header className="header">
+      <header className="header login-signup">
         <div className="header-container">
           <h1 className="header-title login-signup">Save Slot HQ</h1>
         </div>

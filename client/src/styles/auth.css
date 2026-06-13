@@ -23,7 +23,7 @@
 
 .input-wrap-input {
   border-radius: 6px;
-  width: 250px;
+  width: min(250px, 90vw);
   height: 30px;
   transition: border-color 0.2s ease;
   padding: 0 10px;
@@ -33,4 +33,8 @@
 .input-wrap-input:focus, .review-text:focus {
   border-color: rgb(0, 47, 255);
   outline: none;
+}
+
+.btn-link {
+  margin-bottom: 100px;
 }

@@ -43,7 +43,7 @@ export function LoginPage() {
 
   return (
     <div className="default-page login-page">
-      <header className="header">
+      <header className="header login-signup">
         <div className="header-container">
           <h1 className="header-title login-signup">Save Slot HQ</h1>
         </div>

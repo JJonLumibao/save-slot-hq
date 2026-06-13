@@ -19,6 +19,10 @@
   align-items: center;
 }
 
+.all-users-row > span {
+  overflow-wrap: anywhere;
+}
+
 .role-dropdown {
   position: relative;
   width: 90%;

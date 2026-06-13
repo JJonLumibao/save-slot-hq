@@ -1,11 +1,12 @@
-import './styles/admin.css';
 import './styles/animations.css';
 import './styles/auth.css';
 import './styles/games.css';
 import './styles/globals.css';
 import './styles/header.css';
+import './styles/manage-users.css';
 import './styles/modals.css';
 import './styles/reviews.css';
+import './styles/responsive.css';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { LoginPage } from './components/pages/LoginPage'

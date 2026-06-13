@@ -46,7 +46,7 @@ export const GameReviews = ({
       <div className="all-reviews-list">
         {gameReviews.length > 0 ? (
           gameReviews.map((review: Review) => (
-            <div className="all-review-card" key={review.id}>
+            <div className="all-review-card game-review-card" key={review.id}>
               {(user?.role === "PREMIUM" && user.username === review.user.username) || user?.role === "ADMIN"
                 ? <i 
                     className="fa-solid fa-trash-can review-trash"

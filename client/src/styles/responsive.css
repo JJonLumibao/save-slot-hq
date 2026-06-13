@@ -1,0 +1,99 @@
+@media (max-width: 900px) {
+  .header {
+    position: fixed;
+  }
+
+  .games-container {
+    gap: 15px;
+  }
+
+  .content-container {
+    width: 95%;
+    padding: 1rem;
+  }
+
+  .all-review-card,
+  .user-review-card {
+    width: 95%;
+  }
+
+  .all-users-table {
+    width: 95%;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-title {
+    font-size: 1.4rem;
+  }
+
+  .game-card {
+    width: 95%;
+  }
+
+  .game-btn-container {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .content-container {
+    width: 98%;
+    padding: 0.75rem;
+  }
+
+  .content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .content-header {
+    font-size: 2rem;
+  }
+
+  .player-list-container {
+    width: 80%;
+  }
+
+  .rating-review {
+    gap: 9px;
+  }
+
+  .review-text {
+    width: 80%;
+  }
+
+  .star-click {
+    left: -5.15%;
+  }
+
+  .game-review-card {
+    width: 80%;
+  }
+
+  .all-users-row.all-users-header {
+    display: none;
+  }
+
+  .all-users-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid gray;
+    border-radius: 6px;
+  }
+
+  .role-dropdown {
+    width: 100%;
+  }
+
+  .role-dropdown-button {
+    width: 100%;
+  }
+
+  .game-review-group h3 {
+    text-align: center;
+  }
+}

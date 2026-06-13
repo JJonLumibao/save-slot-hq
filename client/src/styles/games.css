@@ -22,7 +22,7 @@
   text-align: center;
   border: 1px solid black;
   border-radius: 5px;
-  width: 180px;
+  width: min(180px, 90vw);
   height: 100px;
   padding: 20px;
   background-image: linear-gradient(to top, rgb(194, 194, 194), white);
@@ -94,10 +94,10 @@
 }
 
 .game-name {
-  width: 400px;
+  width: min(400px, 90vw);
 }
 
 .game-description {
-  width: 400px;
+  width: min(400px, 90vw);
   height: 200px;
 }
