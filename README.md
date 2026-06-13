@@ -2,7 +2,7 @@
 
 Save Slot is a full-stack web application that allows users to interact with a collection of games managed by administrators. Users can create accounts, favorite games, leave reviews, and manage their profiles based on their assigned role.
 
-> This project was built as a portfolio project to demonstrate full-stack web development skills using React, TypeScript, Express, Prisma, PostgreSQL, authentication, authorization, and role-based access control.
+This project was built as a portfolio project to demonstrate full-stack web development skills using React, TypeScript, Express, Prisma, PostgreSQL, authentication, authorization, and role-based access control.
 
 ## Features
 
@@ -72,6 +72,29 @@ Includes all Premium permissions, plus:
 * JWT
 * bcrypt
 * Zod
+
+## Screenshots
+### Login Page
+![Login](screenshots/login.png)
+### Sign Up Page
+![SignUp](screenshots/signup.png)
+### Home Page
+![Home](screenshots/home.png)
+### Regular Member CANNOT Leave Reviews
+![RegModal](screenshots/regularmodal.png)
+### Premium and Admin Members Can Leave Reviews
+![LeaveReview](screenshots/leavereview.png)
+### Different Menus of Roles
+![RegularMenu](screenshots/regularmenu.png)
+![PremiumMenu](screenshots/premiummenu.png)
+![AdminMenu](screenshots/adminmenu.png)
+### Account Information Page
+![AccountInfo](screenshots/accountinfo.png)
+### Review Pages (Premium: My Reviews, Admin: All Reviews)
+![MyReviews](screenshots/myreviews.png)
+![AllReviews](screenshots/allreviews.png)
+### Manage Users Page
+![ManageUsers](screenshots/manageusers.png)
 
 ## Installation
 
@@ -178,6 +201,7 @@ save-slot/
 │   ├── .env.example
 │   └── package.json
 │
+└── screenshots (for README.md)
 └── README.md
 ```
 
